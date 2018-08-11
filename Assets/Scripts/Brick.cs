@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Brick : MonoBehaviour {
-
-
 	private int timesHit;
 	public static int breakableCount = 0; 
 	private int maxHits;
@@ -12,6 +10,7 @@ public class Brick : MonoBehaviour {
 	private bool upDirection = true;
 
 
+	public GameObject smoke;
 	public float floatOffset = 0f;
 	public float floatingSpeed = 0f;
 	public AudioClip crackSound;
@@ -27,6 +26,9 @@ public class Brick : MonoBehaviour {
 		levelManager = GameObject.FindObjectOfType<LevelManager>();
 		maxHits = hitSprites.Length + 1;
 		if (isBreakable()) breakableCount++;
+
+		ParticleSystem.MainModule main = smoke.GetComponent<ParticleSystem>().main;
+		main.startColor = this.gameObject.GetComponent<SpriteRenderer>().color;
 	}
 	
 	// Update is called once per frame
@@ -67,6 +69,7 @@ public class Brick : MonoBehaviour {
 		if (maxHits <= timesHit) {
 			breakableCount--;
 			Object.Destroy(this.gameObject);
+			Object.Instantiate(smoke, this.transform.position, Quaternion.identity);
 			levelManager.BrickDestroyed();
 		} else {
 			LoadSprites();
