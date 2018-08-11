@@ -1,0 +1,9 @@
+._Bricks.app
+.vs
+.vscode
+Packages/
+ProjectSettings/
+Temp/
+obj/
+Bricks.app
+Library/
