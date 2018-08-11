@@ -13,14 +13,17 @@ public class LevelManager : MonoBehaviour {
     public void LoadNextScene()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Brick.breakableCount = 0;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
 	
     public void LoadStartScene() {
+        Brick.breakableCount = 0;
         SceneManager.LoadScene(0);
     }
 
     public void LoadScene(string sceneName) {
+        Brick.breakableCount = 0;
         SceneManager.LoadScene(sceneName);
     }
 
